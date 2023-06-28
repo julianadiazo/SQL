@@ -1,0 +1,41 @@
+/** Backfill for IE Mapping**/
+
+/**This code snippest backfills the 2 remaining environments testing and production with the information in development**/
+
+INSERT INTO ${ENVIRONMET}_STAGING.FO.STG_MAPPING_FOR_MOCK_TABLE (
+    AUDIT_CREATED_DATE,
+    AUDIT_CREATED_BY,
+    AUDIT_LAST_MODIFIED_DATE,
+    AUDIT_LAST_MODIFIED_BY,
+    AUDIT_INSERT_PROCESS_KEY,
+    LEVEL_ONE,  
+    PORTFOLIO_STRESS,   
+    TREE_LEVEL_1,  
+    TREE_LEVEL_2,  
+    TREE_LEVEL_3,  
+    TREE_LEVEL_4,  
+    TREE_LEVEL_5,  
+    TREE_LEVEL_6,  
+    TREE_LEVEL_7,  
+    PORTFOLIO,
+    KEY
+    )
+SELECT 
+    AUDIT_CREATED_DATE,
+    AUDIT_CREATED_BY,
+    AUDIT_LAST_MODIFIED_DATE,
+    AUDIT_LAST_MODIFIED_BY,
+    AUDIT_INSERT_PROCESS_KEY,
+    LEVEL_ONE,  
+    PORTFOLIO_STRESS,   
+    TREE_LEVEL_1,  
+    TREE_LEVEL_2,  
+    TREE_LEVEL_3,  
+    TREE_LEVEL_4,  
+    TREE_LEVEL_5,  
+    TREE_LEVEL_6,  
+    TREE_LEVEL_7,  
+    PORTFOLIO,
+    KEY 
+FROM DEV_STAGING.FO.STG_PORTFOLIO_MAPPING_IE
+;

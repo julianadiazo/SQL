@@ -1,0 +1,19 @@
+/**Simple table creation for snowflake**/
+CREATE OR REPLACE TABLE ${ENVIRONMENT}_STAGING.FO.STG_PORTFOLIO_MAPPING_IE comment='Comment specific for this table' (
+    AUDIT_CREATED_DATE                      TIMESTAMP_NTZ(9) NOT NULL DEFAULT CURRENT_TIMESTAMP(),
+    AUDIT_CREATED_BY                        VARCHAR(50)  NOT NULL      DEFAULT CURRENT_USER(),
+    AUDIT_LAST_MODIFIED_DATE                TIMESTAMP_NTZ(9) NOT NULL DEFAULT CURRENT_TIMESTAMP(),
+    AUDIT_LAST_MODIFIED_BY                  VARCHAR(50)  NOT NULL     DEFAULT CURRENT_USER(),
+    AUDIT_INSERT_PROCESS_KEY                NUMBER(38,0) NOT NULL     DEFAULT -1,
+    LEVEL_ONE                               TEXT,   
+    PORTFOLIO_STRESS                        TEXT NOT NULL,  
+    TREE_LEVEL_1                            TEXT NOT NULL,  
+    TREE_LEVEL_2                            TEXT NOT NULL,  
+    TREE_LEVEL_3                            TEXT NOT NULL,  
+    TREE_LEVEL_4                            TEXT NOT NULL,  
+    TREE_LEVEL_5                            TEXT NOT NULL,  
+    TREE_LEVEL_6                            TEXT,   
+    TREE_LEVEL_7                            TEXT,   
+    PORTFOLIO_NAME                          TEXT,
+    KEY                                     TEXT
+    );
