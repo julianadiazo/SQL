@@ -1,0 +1,42 @@
+with resultstable (host_id,host_name,guest_id,guest_name,result,host_points,guest_points) as (
+select
+    m.host_team as host_id,
+    loc.team_name as host_name,
+    m.guest_team as guest_id,
+    gue.team_name as guest_name,
+    case 
+        when m.host_goals>m.guest_goals then m.host_team
+        when m.host_goals<m.guest_goals then m.guest_team
+        else 0
+        end as result,
+    case 
+        when m.host_goals>m.guest_goals then 3
+        when m.host_goals<m.guest_goals then 0
+        else 1
+        end as host_points,
+    case 
+        when m.host_goals>m.guest_goals then 0
+        when m.host_goals<m.guest_goals then 3
+        else 1
+        end as guest_points
+from matches as m
+    left join teams as loc on loc.team_id=m.host_team
+    left join teams as gue on gue.team_id=m.guest_team
+)
+select 
+    t.team_id,
+    t.team_name,
+    sum(coalesce(host.host_points,0)+coalesce(guest.guest_points,0)) as num_points
+from teams as t
+    left join (
+        select host_id,
+            sum(host_points) as host_points
+        from resultstable 
+        group by host_id) as host on t.team_id=host.host_id
+    left join (
+        select guest_id,
+            sum(guest_points) as guest_points
+        from resultstable 
+        group by guest_id) as guest on t.team_id=guest.guest_id
+group by t.team_id, team_name
+order by sum(coalesce(host.host_points,0)+coalesce(guest.guest_points,0)) desc,t.team_id 
